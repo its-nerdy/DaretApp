@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DARETApp - Trésorerie Intelligente</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' rx='8' fill='url(%23paint0_linear)'/%3E%3Cpath d='M21 11L11 21M21 11H13M21 11V19' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="landing-screen" class="landing-page">
+  <nav class="landing-nav">
+    <div class="logo-title float" style="color: var(--text-main);">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="url(#grad_nav)"/><path d="M21 11L11 21M21 11H13M21 11V19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad_nav" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>
+      <div>DARET<span>App</span></div>
+    </div>
+    
+    <div class="flex-gap">
+      <select class="filter-select lang-select" style="padding: 6px 12px; height: 38px; min-width: auto; background-position: right 8px center;" onchange="changeLang(this.value)">
+        <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
+      </select>
+      <button class="btn-icon theme-btn" style="height: 38px; width: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light); background: var(--bg-surface);" onclick="toggleTheme()">🌙</button>
+      
+      <button class="btn-outline" onclick="showScreen('login')" data-i18n="login_btn">Connexion</button>
+      <button class="btn-primary pulse" onclick="showScreen('signup')" data-i18n="signup_btn">Créer un compte</button>
+    </div>
+  </nav>
+
+  <header class="hero-section float">
+    <div class="badge info" style="display:inline-block; margin-bottom: 20px; font-size: 14px;" data-i18n="hero_badge">✨ La nouvelle ère de la gestion financière</div>
+    <h1 data-i18n="hero_title">Prenez le contrôle total de <br>votre <span class="highlight">Trésorerie</span></h1>
+    <p data-i18n="hero_desc">Fini le stress des fins de mois et les fichiers Excel chaotiques. DARETApp apporte clarté, prévisions intelligentes et tranquillité d'esprit à votre entreprise.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary hero-btn pulse" onclick="showScreen('signup')" data-i18n="hero_start">Commencer gratuitement</button>
+      <button class="btn-outline hero-btn" onclick="showScreen('about')" data-i18n="hero_discover">Découvrir l'équipe</button>
+    </div>
+  </header>
+
+  <div class="stats-row fade-in">
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-text" data-i18n="stat_1">Fichier Excel Requis</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-text" data-i18n="stat_2">Automatisé & Sécurisé</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6 <span style="font-size: 20px;" data-i18n="stat_3_num_label">Mois</span></div>
+      <div class="stat-text" data-i18n="stat_3">De Visibilité Financière</div>
+    </div>
+  </div>
+
+  <section class="features-section" style="margin-top: 40px;">
+    <div class="feature-card fade-in float" style="animation-delay: 0.1s;">
+      <div class="feature-icon">💸</div>
+      <h3 data-i18n="feat_1_title">Suivi en Temps Réel</h3>
+      <p data-i18n="feat_1_desc">Enregistrez et catégorisez vos entrées et sorties d'argent au quotidien avec une interface ultra-rapide.</p>
+    </div>
+    <div class="feature-card fade-in float" style="animation-delay: 0.2s;">
+      <div class="feature-icon">📅</div>
+      <h3 data-i18n="feat_2_title">Gestion des Échéances</h3>
+      <p data-i18n="feat_2_desc">Ne manquez plus jamais un paiement. Le système vous alerte automatiquement des factures en retard et à venir.</p>
+    </div>
+    <div class="feature-card fade-in float" style="animation-delay: 0.3s;">
+      <div class="feature-icon">📊</div>
+      <h3 data-i18n="feat_4_title">Score de Santé IA</h3>
+      <p data-i18n="feat_4_desc">Notre algorithme analyse vos habitudes de dépenses pour vous attribuer une note de santé financière instantanée.</p>
+    </div>
+  </section>
+
+  <section class="steps-section fade-in">
+    <h2 data-i18n="how_it_works_title" style="text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: var(--text-main);">Comment ça marche ?</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 data-i18n="step_1_title">Centralisez vos données</h3>
+        <p data-i18n="step_1_desc">Importez tout votre historique via CSV en un clic, ou ajoutez vos flux manuellement jour par jour.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 data-i18n="step_2_title">Laissez l'IA calculer</h3>
+        <p data-i18n="step_2_desc">Notre moteur calcule votre rythme naturel (Run-Rate) et définit un Buffer de Liquidité Dynamique adapté à votre structure.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 data-i18n="step_3_title">Prenez les bonnes décisions</h3>
+        <p data-i18n="step_3_desc">Visualisez votre solde sur 8 semaines ou 6 mois pour savoir exactement quand investir ou économiser.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner fade-in">
+    <h2 data-i18n="cta_title">Prêt à transformer votre gestion financière ?</h2>
+    <p data-i18n="cta_desc">Rejoignez-nous aujourd'hui et obtenez une visibilité claire et nette sur l'avenir de votre entreprise.</p>
+    <button class="btn-primary hero-btn pulse" onclick="showScreen('signup')" style="margin: 0 auto;" data-i18n="cta_btn">Créer mon espace gratuit</button>
+  </div>
+  
+  <footer class="footer-credits" style="padding-bottom: 40px; margin-top: 40px;">© 2026 DARETApp. Hosted by Nerdy.</footer>
+</div>
+
+<div id="about-screen" class="landing-page" style="display: none;">
+  <nav class="landing-nav">
+    <div class="logo-title float" style="color: var(--text-main); cursor: pointer;" onclick="showScreen('landing')">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="url(#grad_nav2)"/><path d="M21 11L11 21M21 11H13M21 11V19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad_nav2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>
+      <div>DARET<span>App</span></div>
+    </div>
+    <div class="flex-gap">
+      <select class="filter-select lang-select" style="padding: 6px 12px; height: 38px; min-width: auto; background-position: right 8px center;" onchange="changeLang(this.value)">
+        <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
+      </select>
+      <button class="btn-icon theme-btn" style="height: 38px; width: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light); background: var(--bg-surface);" onclick="toggleTheme()">🌙</button>
+      <button class="btn-outline" onclick="showScreen('landing')" data-i18n="back_home">← Retour</button>
+    </div>
+  </nav>
+
+  <div class="about-container fade-in">
+    <div class="prof-section float">
+      <h2 data-i18n="about_project">Projet Encadré Par</h2>
+      <div class="prof-card">
+        <div class="prof-icon">🎓</div>
+        <h3>Pr. Imane BOUDRI</h3>
+        <p data-i18n="about_school">Institut Supérieur de Commerce et d'Administration des Entreprises (ISCAE)</p>
+      </div>
+    </div>
+
+    <h2 class="team-title" data-i18n="about_team">L'Équipe DARETApp</h2>
+    <div class="team-grid">
+      <div class="team-card float" style="animation-delay: 0.1s;"><img src="BEN HERRI Younes.jpeg" alt="Member 1" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>BEN HERRI Younes</h4></div>
+      <div class="team-card float" style="animation-delay: 0.2s;"><img src="MAHJOUBI Mohammad.jpeg" alt="Member 2" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>MAHJOUBI Mohammad</h4></div>
+      <div class="team-card float" style="animation-delay: 0.3s;"><img src="BOUGHABA Malak.jpeg" alt="Member 3" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>BOUGHABA Malak</h4></div>
+      <div class="team-card float" style="animation-delay: 0.4s;"><img src="BOUAGGAD Meryem.jpeg" alt="Member 4" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>BOUAGGAD Meryem</h4></div>
+      <div class="team-card float" style="animation-delay: 0.3s;"><img src="TAIF Rihab.jpeg" alt="Member 5" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>TAIF Rihab</h4></div>
+      <div class="team-card float" style="animation-delay: 0.4s;"><img src="ZIANI Khaoula.jpeg" alt="Member 6" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>ZIANI Khaoula</h4></div>
+      <div class="team-card float" style="animation-delay: 0.1s;"><img src="ACHAMLALE Douaae.jpeg" alt="Member 7" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>ACHAMLALE Douaae</h4></div>
+      <div class="team-card float" style="animation-delay: 0.2s;"><img src="OUED EL KHIR Hiba.jpeg" alt="Member 8" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%2364748b\' text-anchor=\'middle\' dy=\'.3em\'>Photo</text></svg>'"><h4>OUED EL KHIR Hiba</h4></div>
+    </div>
+  </div>
+  <footer class="footer-credits">© 2026 DARETApp. Hosted by Nerdy.</footer>
+</div>
+
+<div id="login-screen" class="auth-bg">
+  <div class="auth-corner-controls">
+    <select class="filter-select lang-select" style="padding: 6px 12px; height: 38px;" onchange="changeLang(this.value)">
+      <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
+    </select>
+    <button class="btn-icon theme-btn" style="height: 38px; width: 38px; border: 1px solid var(--border-light); background: var(--bg-surface);" onclick="toggleTheme()">🌙</button>
+  </div>
+  
+  <div class="auth-box float">
+    <div class="auth-logo">
+      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="url(#grad2)"/><path d="M21 11L11 21M21 11H13M21 11V19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>
+      <div>DARET<span>App</span></div>
+    </div>
+    <div class="auth-sub" data-i18n="login_sub">Heureux de vous revoir</div>
+    <div class="auth-err" id="login-err" data-i18n="login_err">Identifiants incorrects. Réessayez.</div>
+    
+    <label class="auth-label" data-i18n="company_or_email">Nom de l'entreprise ou Email</label>
+    <input class="auth-input" id="inp-company" placeholder="Ex : ISCAEFC1 ou email@ex.com" autocomplete="off"/>
+    
+    <label class="auth-label" data-i18n="password">Mot de passe</label>
+    <input class="auth-input" id="inp-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    
+    <div class="auth-actions">
+      <button class="auth-btn pulse" onclick="doLogin()" data-i18n="login_btn">Se connecter</button>
+      <button class="auth-link-btn" onclick="showScreen('signup')" data-i18n="signup_btn">Créer un compte</button>
+      <button class="auth-link-btn text-muted" onclick="showScreen('landing')" data-i18n="back_home">← Retour à l'accueil</button>
+    </div>
+  </div>
+</div>
+
+<div id="signup-screen" class="auth-bg">
+  <div class="auth-corner-controls">
+    <select class="filter-select lang-select" style="padding: 6px 12px; height: 38px;" onchange="changeLang(this.value)">
+      <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
+    </select>
+    <button class="btn-icon theme-btn" style="height: 38px; width: 38px; border: 1px solid var(--border-light); background: var(--bg-surface);" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <div class="auth-box float">
+    <div class="auth-logo">
+      <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="url(#grad3)"/><path d="M21 11L11 21M21 11H13M21 11V19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad3" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>
+      <div>DARET<span>App</span></div>
+    </div>
+    <div class="auth-sub" data-i18n="signup_sub">Créez votre espace de trésorerie</div>
+    <div class="auth-err" id="signup-err" data-i18n="signup_err">Veuillez remplir tous les champs ou ce compte existe déjà.</div>
+    
+    <label class="auth-label" data-i18n="company_name">Nom de l'entreprise</label>
+    <input class="auth-input" id="reg-company" placeholder="Ex : Mon Entreprise" autocomplete="off"/>
+    
+    <label class="auth-label" data-i18n="email">Email professionnel</label>
+    <input class="auth-input" id="reg-email" type="email" placeholder="contact@entreprise.com" autocomplete="off"/>
+    
+    <label class="auth-label" data-i18n="password">Mot de passe</label>
+    <input class="auth-input" id="reg-pass" type="password" placeholder="••••••••" style="margin-bottom: 20px;" onkeydown="if(event.key==='Enter')doSignup()"/>
+    
+    <div class="auth-actions">
+      <button class="auth-btn pulse" onclick="doSignup()" data-i18n="signup_btn">Créer mon compte</button>
+      <button class="auth-link-btn" onclick="showScreen('login')" data-i18n="login_btn">Se connecter</button>
+      <button class="auth-link-btn text-muted" onclick="showScreen('landing')" data-i18n="back_home">← Retour à l'accueil</button>
+    </div>
+  </div>
+</div>
+
+<div id="app-screen">
+<div id="app">
+  <div id="sidebar">
+    <div class="logo">
+      <div class="logo-title float">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="8" fill="url(#grad4)"/><path d="M21 11L11 21M21 11H13M21 11V19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="grad4" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>
+        <div>DARET<span>App</span></div>
+      </div>
+      <div class="logo-sub" id="sidebar-company">Entreprise</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-item active" onclick="showPage('dashboard',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span data-i18n="nav_dash">Dashboard</span>
+      </div>
+      <div class="nav-item" onclick="showPage('flux',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20V10m0 0l-3 3m3-3l3 3M4 4h16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="nav_flux">Flux de trésorerie</span>
+      </div>
+      <div class="nav-item" onclick="showPage('echeancier',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_ech">Échéancier</span>
+      </div>
+      <div class="nav-item" onclick="showPage('prevision',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18M7 14l4-4 4 4 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="nav_prev">Prévision</span>
+      </div>
+    </nav>
+  </div>
+
+  <div id="main">
+    <div id="topbar">
+      <div>
+        <div class="topbar-title flex-gap" id="page-title">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--primary)" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span data-i18n="nav_dash">Dashboard</span>
+        </div>
+        <div class="topbar-date" id="page-date"></div>
+      </div>
+      
+      <div class="topbar-right">
+        <select class="filter-select lang-select" style="padding: 6px 12px; height: 36px; min-width: auto; margin-right: 10px;" onchange="changeLang(this.value)">
+          <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option>
+        </select>
+        <button class="btn-icon theme-btn" style="font-size: 18px; margin-right: 10px; height: 36px; width: 36px; border: 1px solid var(--border-light);" onclick="toggleTheme()">🌙</button>
+        
+        <div class="profile-trigger" onclick="openProfileModal()" title="Paramètres">
+          <img class="avatar" id="topbar-avatar-img" style="display:none; object-fit: cover;" />
+          <div class="avatar" id="topbar-avatar">IS</div>
+          <span class="topbar-user" id="topbar-company">Entreprise</span>
+        </div>
+        
+        <button class="btn-danger" onclick="doLogout()" data-i18n="logout">Déconnexion</button>
+      </div>
+    </div>
+
+    <div id="content">
+
+      <div class="page active" id="page-dashboard">
+        <div class="card sync-card fade-in">
+          <div class="flex-between">
+            <div>
+              <h3 style="font-size: 16px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <span data-i18n="sync_title">Synchronisation Globale</span>
+              </h3>
+            </div>
+            <div class="flex-gap">
+              <input type="file" id="global-csv-input" accept=".csv" style="display: none;" onchange="importGlobalCSV(event)" />
+              <button class="btn-secondary pulse" onclick="document.getElementById('global-csv-input').click()" data-i18n="import_csv">Importer CSV</button>
+              <button class="btn-primary" onclick="exportGlobalCSV()" data-i18n="export_csv">Exporter CSV</button>
+              <button class="btn-danger" onclick="resetData()" data-i18n="reset_data">Réinitialiser</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi success fade-in" style="animation-delay: 0.1s;">
+            <div class="kpi-label" data-i18n="kpi_balance">Solde actuel</div><div class="kpi-val" id="kpi-solde">—</div>
+          </div>
+          <div class="kpi success fade-in" style="animation-delay: 0.2s;">
+            <div class="kpi-label" data-i18n="kpi_in">Entrées Réalisées</div><div class="kpi-val pos" id="kpi-entrees">—</div>
+          </div>
+          <div class="kpi danger fade-in" style="animation-delay: 0.3s;">
+            <div class="kpi-label" data-i18n="kpi_out">Sorties Réalisées</div><div class="kpi-val neg" id="kpi-sorties">—</div>
+          </div>
+          <div class="kpi warn fade-in" style="animation-delay: 0.4s;">
+            <div class="kpi-label" data-i18n="kpi_next">Prochaine échéance</div>
+            <div class="kpi-val" id="kpi-next-ech" style="font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">—</div><div class="kpi-sub" id="kpi-next-ech-date">—</div>
+          </div>
+          <div class="kpi info fade-in float" style="animation-delay: 0.5s;">
+            <div class="kpi-label" data-i18n="kpi_health">Santé Financière</div>
+            <div class="kpi-val" id="kpi-health-score" style="font-size:28px;">—</div>
+            <div class="kpi-sub" id="kpi-health-desc" style="font-weight: 600; margin-top: 5px;">En attente de données</div>
+          </div>
+        </div>
+        
+        <div class="card fade-in" style="animation-delay: 0.6s;">
+          <div class="flex-between" style="margin-bottom: 20px;">
+            <div class="card-title" style="margin:0;" data-i18n="chart_title">Évolution Globale</div>
+            <div class="flex-gap" style="align-items: center; background: var(--bg-body); padding: 4px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+              <button class="btn-icon" onclick="changeChartYear(-1)">❮</button>
+              <span id="chart-year-display" style="font-weight: 700; color: var(--primary); font-size: 14px;">2026</span>
+              <button class="btn-icon" onclick="changeChartYear(1)">❯</button>
+            </div>
+          </div>
+          <div class="chart-wrap" style="height:350px; position:relative;"><canvas id="chartDash"></canvas></div>
+        </div>
+      </div>
+
+      <div class="page" id="page-flux">
+        <div class="card">
+          <div class="section-head"><h3 style="margin: 0;" data-i18n="add_flux">Ajouter un flux</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label data-i18n="label_name">Libellé</label><input id="f-lib" placeholder="..."/></div>
+            <div class="form-group"><label data-i18n="label_amount">Montant</label><input id="f-mont" type="number"/></div>
+            <div class="form-group"><label data-i18n="label_type">Type</label><select id="f-type"><option value="entree" data-i18n="opt_in">Entrée</option><option value="sortie" data-i18n="opt_out">Sortie</option></select></div>
+            <div class="form-group"><label data-i18n="label_date">Date</label><input id="f-date" type="date"/></div>
+            <div class="form-group"><label data-i18n="label_cat">Catégorie</label><select id="f-cat">
+                <option value="Ventes" data-i18n="cat_ventes">Ventes</option><option value="Salaires" data-i18n="cat_salaires">Salaires</option>
+                <option value="Loyer" data-i18n="cat_loyer">Loyer</option><option value="TVA" data-i18n="cat_tva">TVA</option>
+                <option value="Fournisseurs" data-i18n="cat_fournisseurs">Fournisseurs</option><option value="Autre" data-i18n="cat_autre">Autre</option>
+            </select></div>
+          </div>
+          <button class="btn-primary" onclick="addFlux()" data-i18n="btn_save">Enregistrer</button>
+        </div>
+        
+        <div class="card">
+          <div class="section-head flex-between">
+            <h3 style="margin: 0;" data-i18n="history_flux">Historique</h3>
+            <span style="font-size:12px; font-weight: 500; color:var(--text-muted)" id="flux-count-label"></span>
+          </div>
+          
+          <div class="controls-row flex-gap" style="margin-bottom: 20px; flex-wrap: wrap;">
+            <input type="text" class="search-bar" id="search-flux" data-i18n="search" placeholder="Rechercher..." onkeyup="renderFlux()">
+            <select class="filter-select" id="filter-flux-date" onchange="renderFlux()">
+              <option value="all" data-i18n="filter_all">Toutes les dates</option><option value="this_month" data-i18n="filter_month">Ce mois</option><option value="this_year" data-i18n="filter_year">Cette année</option>
+            </select>
+            <select class="filter-select" id="filter-flux-type" onchange="renderFlux()">
+              <option value="all" data-i18n="filter_type">Tous les types</option><option value="entree" data-i18n="opt_in">Entrée</option><option value="sortie" data-i18n="opt_out">Sortie</option>
+            </select>
+            <select class="filter-select" id="filter-flux-cat" onchange="renderFlux()">
+              <option value="all" data-i18n="filter_cat">Toutes les catégories</option><option value="Ventes" data-i18n="cat_ventes">Ventes</option><option value="Salaires" data-i18n="cat_salaires">Salaires</option><option value="Loyer" data-i18n="cat_loyer">Loyer</option><option value="TVA" data-i18n="cat_tva">TVA</option><option value="Fournisseurs" data-i18n="cat_fournisseurs">Fournisseurs</option><option value="Autre" data-i18n="cat_autre">Autre</option>
+            </select>
+            <select class="filter-select" id="sort-flux" onchange="renderFlux()">
+              <option value="date_desc" data-i18n="sort_new">Date (Plus récent)</option><option value="date_asc" data-i18n="sort_old">Date (Plus ancien)</option>
+              <option value="mont_desc" data-i18n="sort_high">Montant (Décroissant)</option><option value="mont_asc" data-i18n="sort_mont_asc">Montant (Croissant)</option>
+              <option value="lib_asc" data-i18n="sort_lib">Libellé (A-Z)</option><option value="cat_asc" data-i18n="sort_cat">Catégorie (A-Z)</option>
+            </select>
+          </div>
+
+          <table><thead><tr><th data-i18n="label_date">Date</th><th data-i18n="label_name">Libellé</th><th data-i18n="label_cat">Catégorie</th><th data-i18n="label_type">Type</th><th data-i18n="label_amount">Montant</th><th data-i18n="label_actions">Actions</th></tr></thead><tbody id="flux-table"></tbody></table>
+          <div class="pagination" id="flux-pagination"></div>
+        </div>
+      </div>
+
+      <div class="page" id="page-echeancier">
+        <div class="card">
+          <div class="section-head"><h3 style="margin: 0;" data-i18n="add_ech">Planifier une échéance</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label data-i18n="label_name">Libellé</label><input id="e-lib" placeholder="..."/></div>
+            <div class="form-group"><label data-i18n="label_amount">Montant</label><input id="e-mont" type="number"/></div>
+            <div class="form-group"><label data-i18n="label_type">Type</label><select id="e-type"><option value="sortie" data-i18n="opt_out">Sortie</option><option value="entree" data-i18n="opt_in">Entrée</option></select></div>
+            <div class="form-group"><label data-i18n="label_date">Date</label><input id="e-date" type="date"/></div>
+            <div class="form-group"><label data-i18n="label_cat">Catégorie</label><select id="e-cat">
+                <option value="Loyer" data-i18n="cat_loyer">Loyer</option><option value="Fournisseurs" data-i18n="cat_fournisseurs">Fournisseurs</option>
+                <option value="TVA" data-i18n="cat_tva">TVA</option><option value="Salaires" data-i18n="cat_salaires">Salaires</option>
+                <option value="Ventes" data-i18n="cat_ventes">Ventes</option><option value="Autre" data-i18n="cat_autre">Autre</option>
+            </select></div>
+            <div class="form-group"><label data-i18n="label_status">Statut</label><select id="e-stat"><option value="futur" data-i18n="stat_futur">A venir</option><option value="paye" data-i18n="stat_paye">Payé</option></select></div>
+          </div>
+          <button class="btn-primary" onclick="addEch()" data-i18n="btn_save">Enregistrer</button>
+        </div>
+
+        <div class="card">
+          <div id="ech-alerts-section"></div>
+          <div class="section-head flex-between">
+            <h3 style="margin: 0;" data-i18n="history_ech">Suivi des Paiements</h3>
+            <span style="font-size:12px; font-weight: 500; color:var(--text-muted)" id="ech-count-label"></span>
+          </div>
+
+          <div class="controls-row flex-gap" style="margin-bottom: 20px; flex-wrap: wrap;">
+            <input type="text" class="search-bar" id="search-ech" data-i18n="search" placeholder="Rechercher..." onkeyup="renderEch()">
+            <select class="filter-select" id="filter-ech-date" onchange="renderEch()">
+              <option value="all" data-i18n="filter_all">Toutes les dates</option><option value="this_month" data-i18n="filter_month">Ce mois</option><option value="this_year" data-i18n="filter_year">Cette année</option>
+            </select>
+            <select class="filter-select" id="filter-ech-type" onchange="renderEch()">
+              <option value="all" data-i18n="filter_type">Tous les types</option><option value="entree" data-i18n="opt_in">Entrée</option><option value="sortie" data-i18n="opt_out">Sortie</option>
+            </select>
+            <select class="filter-select" id="filter-ech-stat" onchange="renderEch()">
+              <option value="all" data-i18n="filter_stat">Tous les statuts</option><option value="futur" data-i18n="stat_futur">A venir</option><option value="paye" data-i18n="stat_paye">Payé</option>
+            </select>
+            <select class="filter-select" id="sort-ech" onchange="renderEch()">
+               <option value="date_asc" data-i18n="sort_old">Date (Plus proche)</option><option value="date_desc" data-i18n="sort_new">Date (Plus lointain)</option>
+               <option value="mont_desc" data-i18n="sort_high">Montant (Décroissant)</option><option value="mont_asc" data-i18n="sort_mont_asc">Montant (Croissant)</option>
+               <option value="lib_asc" data-i18n="sort_lib">Libellé (A-Z)</option>
+            </select>
+          </div>
+
+          <table><thead><tr><th data-i18n="label_date">Date</th><th data-i18n="label_name">Libellé</th><th data-i18n="label_cat">Catégorie</th><th data-i18n="label_type">Type</th><th data-i18n="label_amount">Montant</th><th data-i18n="label_status">Statut</th><th data-i18n="label_actions">Actions</th></tr></thead><tbody id="ech-table"></tbody></table>
+          <div class="pagination" id="ech-pagination"></div>
+        </div>
+      </div>
+
+      <div class="page" id="page-prevision">
+        <div id="prevision-content">
+          <div class="card alert-bar info fade-in float" style="border:none; margin-bottom: 24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span data-i18n="prev_smart"><strong>Moteur Intelligent :</strong> Les prévisions calculent votre rythme naturel sur TOUT l'historique ET y ajoutent vos échéances futures.</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title" data-i18n="prev_params">Paramètres de Simulation</div>
+            
+            <div class="seuil-row" style="background: transparent; border: none; padding: 0; margin-bottom: 16px;">
+              <select class="filter-select" id="prev-period-type" onchange="renderPrevision()" style="width: 250px;">
+                <option value="weeks" data-i18n="prev_weeks">Hebdomadaire (8 sem)</option>
+                <option value="months" data-i18n="prev_months">Mensuelle (6 mois)</option>
+              </select>
+            </div>
+            
+            <div class="seuil-row">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <label id="label-prev-alert">Seuil d'alerte:</label>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <input id="seuil-input" type="number" onchange="renderPrevision()" style="width: 140px;"/>
+                        <button class="btn-outline" onclick="resetSeuil()" style="padding: 8px 12px; font-size: 14px;" data-i18n="reset">↺ Réinitialiser</button>
+                    </div>
+                    <span id="suggested-seuil-text" style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;"></span>
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <label id="label-prev-in">Entrées (Moy Hebdo):</label>
+                    <input id="prev-entrees" type="text" readonly style="width: 180px; background: transparent; cursor: not-allowed; border: 1px dashed var(--border-light); color: var(--secondary);" />
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <label id="label-prev-out">Sorties (Moy Hebdo):</label>
+                    <input id="prev-sorties" type="text" readonly style="width: 180px; background: transparent; cursor: not-allowed; border: 1px dashed var(--border-light); color: var(--danger);" />
+                </div>
+            </div>
+          </div>
+          
+          <div id="prev-alerts"></div>
+          
+          <div class="card">
+            <div class="chart-wrap" style="height:350px; position:relative;"><canvas id="chartPrev"></canvas></div>
+          </div>
+          
+          <div class="card">
+            <table><thead><tr><th data-i18n="table_period">Période</th><th data-i18n="label_date">Dates</th><th data-i18n="table_net">Flux Net</th><th data-i18n="table_ech">Échéances</th><th data-i18n="table_balance">Solde Projeté</th></tr></thead><tbody id="prev-table"></tbody></table>
+          </div>
+        </div>
+
+        <div id="prevision-empty-state" style="display: none; text-align: center; padding: 60px 20px;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" style="margin-bottom: 20px;"><path d="M3 3v18h18M7 14l4-4 4 4 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2 style="color: var(--text-main); margin-bottom: 12px; font-size: 24px;" data-i18n="empty_title">Pas de données</h2>
+          <p style="color: var(--text-muted); font-size: 16px; max-width: 500px; margin: 0 auto 24px;" data-i18n="empty_desc">Importez des données pour voir les prévisions.</p>
+        </div>
+      </div>
+      
+      <footer class="footer-credits" style="padding-top: 40px;">© 2026 DARETApp. Hosted by Nerdy.</footer>
+
+    </div>
+  </div>
+</div>
+
+<div id="profile-modal" class="modal-overlay" style="display:none;">
+  <div class="modal-box card fade-in">
+    <h3 style="font-size: 18px; margin-bottom: 20px; color: var(--text-main);" data-i18n="edit_profile">Paramètres du Profil</h3>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 20px;">
+      <div style="position: relative;">
+        <img id="profile-preview" src="" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background: var(--border-light); display: none; box-shadow: var(--shadow-md);"/>
+        <button id="remove-photo-btn" class="btn-icon" style="position:absolute; top:-5px; right:-5px; background:var(--danger); color:white; border-radius:50%; width:24px; height:24px; font-size:12px; display:none; justify-content:center; align-items:center;" onclick="removeProfilePhoto()">✖</button>
+      </div>
+      <div id="profile-initials-preview" style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; box-shadow: var(--shadow-sm);"></div>
+      <button class="btn-outline pulse" style="padding: 6px 12px; font-size: 12px;" onclick="document.getElementById('profile-pic-input').click()" data-i18n="change_photo">Changer la photo</button>
+      <input type="file" id="profile-pic-input" accept="image/*" style="display: none;" onchange="handleImageUpload(event)" />
+    </div>
+
+    <div class="form-group" style="margin-bottom: 16px;">
+      <label data-i18n="company_name">Nom de l'entreprise</label>
+      <input type="text" id="edit-name" disabled style="background: var(--border-light); cursor: not-allowed;"/>
+    </div>
+    
+    <div class="form-group" style="margin-bottom: 16px;">
+      <label data-i18n="currency_label">Devise par défaut</label>
+      <select id="edit-currency">
+        <option value="MAD">MAD</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="USD">USD ($)</option>
+        <option value="GBP">GBP (£)</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 24px;">
+      <label data-i18n="password">Nouveau mot de passe</label>
+      <input type="password" id="edit-pass" placeholder="••••••••"/>
+    </div>
+
+    <div class="flex-gap" style="justify-content: flex-end;">
+      <button class="btn-outline" onclick="closeProfileModal()" data-i18n="cancel">Annuler</button>
+      <button class="btn-primary" onclick="saveProfile()" data-i18n="btn_save">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
