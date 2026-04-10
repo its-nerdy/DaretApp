@@ -11,6 +11,7 @@ let fluxPage = 1; let echPage = 1; const PER_PAGE = 8;
 let fluxSearch = ""; let echSearch = "";
 let currentSuggestedSeuil = 10000;
 let currentCurrency = localStorage.getItem('daretApp_currency') || 'MAD';
+let currentLang = localStorage.getItem('daretApp_lang') || 'fr'; // <-- THE FIX IS HERE
 
 // ================= I18N =================
 const translations = {
