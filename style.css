@@ -507,7 +507,7 @@ td { padding: 16px; border-bottom: 1px solid var(--border-light); color: var(--t
 tr { transition: background-color 0.2s; }
 tr:hover td { background-color: var(--input-bg); }
 
-.badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;}
+.badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; display: inline-block; text-align: center;}
 .badge.entree, .badge.paye { background: var(--success-bg); color: #10b981; }
 .badge.sortie { background: var(--danger-bg); color: #f43f5e; }
 .badge.retard { background: var(--warning-bg); color: #f59e0b; }
