@@ -186,13 +186,13 @@ async function doLogin() {
   try {
       const res = await fetch('/api/login', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ identifier: c, pass: p }) // Backend now expects 'identifier' (name or email)
+          body: JSON.stringify({ identifier: c, pass: p }) 
       });
       const data = await res.json();
       
       if(data.success){
         document.getElementById('login-err').style.display = 'none'; 
-        currentUser = data.user.id; // Backend returns correct ID
+        currentUser = data.user.id; 
         currentUserData = data.user;
         localStorage.setItem('daretApp_loggedInUser', currentUser); 
         loadDataFromObject(currentUserData);
@@ -253,7 +253,10 @@ async function checkAndLoadSession() {
             }
         } catch (err) {
             console.error("No server connection, remaining on login.");
+            doLogout();
         }
+    } else {
+        showScreen('landing');
     }
 }
 
@@ -286,7 +289,13 @@ async function saveData() {
 
 window.onload = function() {
   applyTheme(); changeLang(currentLang);
-  checkAndLoadSession();
+  const loggedInUser = localStorage.getItem('daretApp_loggedInUser');
+  if (loggedInUser) {
+      document.getElementById('landing-screen').style.display = 'none';
+      checkAndLoadSession();
+  } else {
+      showScreen('landing');
+  }
 };
 
 function showScreen(screenId) {
@@ -440,10 +449,12 @@ function importGlobalCSV(e) {
     if(echData.length > 0) echIdCnt = Math.max(...echData.map(ev=>ev.id)) + 1;
     
     fluxPage = 1; echPage = 1; saveData(); 
-    if(document.getElementById('page-dashboard').classList.contains('active')) renderDashboard();
-    else if(document.getElementById('page-flux').classList.contains('active')) renderFlux();
-    else if(document.getElementById('page-echeancier').classList.contains('active')) renderEch();
-    else if(document.getElementById('page-prevision').classList.contains('active')) renderPrevision();
+    
+    // Rendre TOUTES les pages immédiatement pour régler le bug de la langue
+    renderDashboard(); 
+    renderFlux(); 
+    renderEch(); 
+    renderPrevision();
     document.getElementById('global-csv-input').value = ''; 
   };
   reader.readAsText(file);
