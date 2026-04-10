@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.static(__dirname));
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGO_URI;
 let db;
 
 if (uri) {
